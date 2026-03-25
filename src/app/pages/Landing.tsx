@@ -9,6 +9,7 @@ import { AnimatedMusicIcon } from "../components/AnimatedMusicIcon";
 import { CategorySelectionModal } from "../components/CategorySelectionModal";
 import { useUsername } from "../contexts/UsernameContext";
 import { Navbar } from "../components/Navbar";
+import { SvgBackground } from "../components/SvgBAckground";
 
 export function Landing() {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -82,6 +83,20 @@ export function Landing() {
     navigate(`/room/${privateRoomId}`);
   };
 
+  const instrumentTypes = ["note", "mic", "vinyl", "piano", "headphones", "trumpet", "guitar", "drum"] as const;
+  const xPositions = Array.from({ length: 16 }, (_, i) => 80 + i * 112);
+  const yPositions = Array.from({ length: 12 }, (_, i) => 80 + i * 85);
+
+  const instrumentPlacements = yPositions.flatMap((y, row) =>
+    xPositions.map((x, col) => ({
+      x: x + (row % 2 === 0 ? 0 : 28),
+      y,
+      rotate: ((row * 7 + col * 5) % 16) - 8,
+      scale: 0.62 + ((row + col) % 3) * 0.05,
+      type: instrumentTypes[(row * 3 + col) % instrumentTypes.length],
+    })),
+  );
+
   return (
     <div className="min-h-screen bg-background transition-colors duration-300 relative overflow-hidden">
 
@@ -99,331 +114,7 @@ export function Landing() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-12 md:py-20 text-center mx-[64px] mt-[32px] mb-[72px] relative">
         {/* Musical Background Pattern - Only in Hero Section */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.25] dark:opacity-[0.35] overflow-hidden">
-          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-            <g transform="translate(100, 540)">
-            <ellipse cx="40" cy="0" rx="30" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="10" y1="0" x2="10" y2="40" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="70" y1="0" x2="70" y2="40" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <ellipse cx="40" cy="40" rx="30" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="20" y1="20" x2="60" y2="20" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" opacity="0.5" />
-          </g>
-
-          {/* Music Notes - Top Center */}
-          <g transform="translate(864, 120)">
-            <circle cx="0" cy="20" r="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="5" y1="20" x2="5" y2="-10" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="20" cy="25" r="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="25" y1="25" x2="25" y2="-5" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <path d="M 5 -10 Q 15 -15 25 -5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Headphones - Bottom Right */}
-          <g transform="translate(1536, 810)">
-            <path d="M 20 0 Q 50 -10 80 0" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" />
-            <rect x="15" y="0" width="12" height="20" rx="3" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="73" y="0" width="12" height="20" rx="3" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Piano Keys - Bottom Left */}
-          <g transform="translate(192, 864)">
-            <rect x="0" y="0" width="15" height="50" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="15" y="0" width="15" height="50" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="30" y="0" width="15" height="50" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="10" y="0" width="10" height="30" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" opacity="0.6" />
-            <rect x="25" y="0" width="10" height="30" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" opacity="0.6" />
-          </g>
-
-          {/* Vinyl Record - Middle Right */}
-          <g transform="translate(1728, 486)">
-            <circle cx="0" cy="0" r="35" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="0" cy="0" r="25" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" opacity="0.5" />
-            <circle cx="0" cy="0" r="15" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" opacity="0.5" />
-            <circle cx="0" cy="0" r="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Saxophone - Bottom Center */}
-          <g transform="translate(1056, 810) rotate(25)">
-            <path d="M 20 0 Q 10 20 15 40 L 25 60" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" />
-            <circle cx="25" cy="65" r="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="18" cy="15" r="2" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <circle cx="16" cy="25" r="2" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <circle cx="18" cy="35" r="2" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-          </g>
-
-          {/* Treble Clef - Top Middle Left */}
-          <g transform="translate(480, 180)">
-            <path d="M 10 20 Q 5 10 10 0 Q 15 -5 20 0 Q 25 10 20 25 Q 15 35 10 30 L 8 50 Q 5 60 10 65 Q 15 68 20 65" 
-                  fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="10" cy="40" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-          </g>
-
-          {/* Electric Guitar - Middle Bottom */}
-          <g transform="translate(672, 702) rotate(-10)">
-            <path d="M 0 0 L 40 0 L 45 10 L 40 20 L 0 20 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="-20" y="8" width="20" height="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="-5" y1="0" x2="-5" y2="20" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-            <line x1="0" y1="0" x2="0" y2="20" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-          </g>
-
-          {/* Music Note Large - Center Right */}
-          <g transform="translate(1344, 378)">
-            <circle cx="0" cy="30" r="8" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" />
-            <line x1="8" y1="30" x2="8" y2="-15" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" />
-            <path d="M 8 -15 L 25 -10 L 25 10" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Trumpet - Top Left Corner */}
-          <g transform="translate(288, 162) rotate(15)">
-            <path d="M 0 10 L 30 10 L 30 15 L 0 15 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <path d="M 30 8 L 50 0 L 50 25 L 30 17 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="8" cy="12.5" r="2" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <circle cx="15" cy="12.5" r="2" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <circle cx="22" cy="12.5" r="2" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-          </g>
-
-          {/* Guitar 2 - Top Right Side */}
-          <g transform="translate(1440, 220) rotate(35)">
-            <ellipse cx="30" cy="50" rx="22" ry="18" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="30" cy="50" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <rect x="27" y="10" width="6" height="30" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="28" y1="10" x2="28" y2="60" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-            <line x1="30" y1="10" x2="30" y2="60" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-            <line x1="32" y1="10" x2="32" y2="60" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-          </g>
-
-          {/* Violin - Bottom Left Side */}
-          <g transform="translate(346, 950) rotate(-20)">
-            <path d="M 25 0 L 25 40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <ellipse cx="25" cy="50" rx="12" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <path d="M 20 50 L 15 55 M 30 50 L 35 55" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <ellipse cx="25" cy="65" rx="10" ry="7" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="22" y1="40" x2="22" y2="70" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-            <line x1="28" y1="40" x2="28" y2="70" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-          </g>
-
-          {/* Tambourine - Top Center Right */}
-          <g transform="translate(1248, 130)">
-            <circle cx="0" cy="0" r="25" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" />
-            <circle cx="-15" cy="0" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <circle cx="15" cy="0" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <circle cx="0" cy="15" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <circle cx="0" cy="-15" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <line x1="-15" y1="-15" x2="15" y2="15" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" opacity="0.5" />
-            <line x1="-15" y1="15" x2="15" y2="-15" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" opacity="0.5" />
-          </g>
-
-          {/* Bass Guitar - Middle Left Bottom */}
-          <g transform="translate(230, 670) rotate(10)">
-            <path d="M 0 0 L 35 0 L 38 8 L 35 16 L 0 16 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="-25" y="6" width="25" height="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="-8" y1="0" x2="-8" y2="16" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-            <line x1="-3" y1="0" x2="-3" y2="16" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-            <line x1="2" y1="0" x2="2" y2="16" stroke="currentColor" strokeWidth="0.5" className="text-muted-foreground" />
-          </g>
-
-          {/* Microphone 2 - Bottom Right Corner */}
-          <g transform="translate(1766, 918) rotate(-25)">
-            <rect x="0" y="0" width="18" height="32" rx="9" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="9" y1="32" x2="9" y2="50" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <ellipse cx="9" cy="54" rx="13" ry="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="4" y1="8" x2="14" y2="8" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <line x1="4" y1="13" x2="14" y2="13" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-          </g>
-
-          {/* Drum Set - Top Center */}
-          <g transform="translate(960, 216)">
-            <ellipse cx="0" cy="0" rx="20" ry="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="-20" y1="0" x2="-20" y2="30" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="20" y1="0" x2="20" y2="30" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <ellipse cx="0" cy="30" rx="20" ry="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Music Notes - Bottom Center Left */}
-          <g transform="translate(538, 994)">
-            <circle cx="0" cy="15" r="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="4" y1="15" x2="4" y2="-5" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="15" cy="18" r="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="19" y1="18" x2="19" y2="-2" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Headphones 2 - Middle Top */}
-          <g transform="translate(768, 270)">
-            <path d="M 15 0 Q 40 -8 65 0" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" />
-            <rect x="12" y="0" width="10" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="58" y="0" width="10" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Vinyl Record 2 - Top Left Side */}
-          <g transform="translate(154, 302)">
-            <circle cx="0" cy="0" r="30" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="0" cy="0" r="20" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" opacity="0.5" />
-            <circle cx="0" cy="0" r="10" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" opacity="0.5" />
-            <circle cx="0" cy="0" r="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Treble Clef 2 - Middle Right */}
-          <g transform="translate(1574, 594) rotate(15)">
-            <path d="M 8 15 Q 4 8 8 0 Q 12 -4 16 0 Q 20 8 16 20 Q 12 28 8 24 L 6 40 Q 4 48 8 52 Q 12 54 16 52" 
-                  fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="8" cy="32" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-          </g>
-
-          {/* Piano Keys 2 - Top Right Area */}
-          <g transform="translate(1690, 324) rotate(-10)">
-            <rect x="0" y="0" width="12" height="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="12" y="0" width="12" height="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="24" y="0" width="12" height="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <rect x="8" y="0" width="8" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" opacity="0.6" />
-            <rect x="20" y="0" width="8" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" opacity="0.6" />
-          </g>
-
-          {/* Trumpet 2 - Bottom Middle */}
-          <g transform="translate(922, 950) rotate(-30)">
-            <path d="M 0 8 L 25 8 L 25 12 L 0 12 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <path d="M 25 6 L 42 0 L 42 20 L 25 14 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="6" cy="10" r="1.5" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <circle cx="12" cy="10" r="1.5" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <circle cx="18" cy="10" r="1.5" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-          </g>
-
-          {/* Music Note - Bottom Right Side */}
-          <g transform="translate(1498, 994)">
-            <circle cx="0" cy="20" r="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="6" y1="20" x2="6" y2="-10" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Microphone 3 - Middle Center */}
-          <g transform="translate(1114, 518) rotate(45)">
-            <rect x="0" y="0" width="16" height="28" rx="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="8" y1="28" x2="8" y2="42" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <ellipse cx="8" cy="45" rx="11" ry="3" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Saxophone 2 - Top Left Area */}
-          <g transform="translate(422, 378) rotate(-15)">
-            <path d="M 15 0 Q 8 15 12 30 L 20 45" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" />
-            <circle cx="20" cy="50" r="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="14" cy="12" r="1.5" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <circle cx="12" cy="20" r="1.5" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-            <circle cx="14" cy="28" r="1.5" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" />
-          </g>
-
-          {/* Tambourine 2 - Middle Bottom Right */}
-          <g transform="translate(1382, 842)">
-            <circle cx="0" cy="0" r="20" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" />
-            <circle cx="-12" cy="0" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <circle cx="12" cy="0" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <circle cx="0" cy="12" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-            <circle cx="0" cy="-12" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" />
-          </g>
-
-          {/* Drum 2 - Bottom Right Area */}
-          <g transform="translate(1632, 648)">
-            <ellipse cx="25" cy="0" rx="22" ry="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="3" y1="0" x2="3" y2="32" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="47" y1="0" x2="47" y2="32" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <ellipse cx="25" cy="32" rx="22" ry="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* Music Notes Group - Middle Top Left */}
-          <g transform="translate(614, 410)">
-            <circle cx="0" cy="12" r="3.5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="3.5" y1="12" x2="3.5" y2="-5" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <circle cx="12" cy="15" r="3.5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <line x1="15.5" y1="15" x2="15.5" y2="-2" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-            <path d="M 3.5 -5 Q 9.5 -8 15.5 -2" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" />
-          </g>
-
-          {/* 3X MORE INSTRUMENTS - Quadruple density for immersive background */}
-          <g transform="translate(120, 180) rotate(25)"><ellipse cx="30" cy="50" rx="25" ry="20" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><circle cx="30" cy="50" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" /></g>
-          <g transform="translate(380, 140) rotate(-12)"><rect x="0" y="0" width="20" height="35" rx="10" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="10" y1="35" x2="10" y2="55" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><ellipse cx="10" cy="60" rx="15" ry="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(750, 90)"><circle cx="0" cy="0" r="30" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><circle cx="0" cy="0" r="20" fill="none" stroke="currentColor" strokeWidth="1" className="text-muted-foreground" opacity="0.5" /><circle cx="0" cy="0" r="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1050, 120)"><circle cx="0" cy="20" r="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="5" y1="20" x2="5" y2="-10" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1360, 80) rotate(18)"><path d="M 10 20 Q 5 10 10 0 Q 15 -5 20 0 Q 25 10 20 25 Q 15 35 10 30 L 8 50 Q 5 60 10 65 Q 15 68 20 65" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1550, 60) rotate(-28)"><path d="M 0 10 L 30 10 L 30 15 L 0 15 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><path d="M 30 8 L 50 0 L 50 25 L 30 17 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1750, 140) rotate(35)"><rect x="0" y="0" width="15" height="50" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><rect x="15" y="0" width="15" height="50" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(220, 320) rotate(-18)"><ellipse cx="40" cy="0" rx="30" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="10" y1="0" x2="10" y2="40" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="70" y1="0" x2="70" y2="40" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><ellipse cx="40" cy="40" rx="30" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(520, 280) rotate(22)"><path d="M 20 0 Q 10 20 15 40 L 25 60" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /><circle cx="25" cy="65" r="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(840, 290)"><circle cx="0" cy="0" r="25" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /><circle cx="-15" cy="0" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" /><circle cx="15" cy="0" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1120, 310) rotate(-32)"><path d="M 15 0 Q 40 -8 65 0" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /><rect x="12" y="0" width="10" height="16" rx="2" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1420, 340) rotate(8)"><path d="M 25 0 L 25 40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><ellipse cx="25" cy="50" rx="12" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1680, 280) rotate(-42)"><path d="M 0 0 L 35 0 L 38 8 L 35 16 L 0 16 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(60, 260)"><circle cx="0" cy="30" r="8" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /><line x1="8" y1="30" x2="8" y2="-15" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(140, 500) rotate(15)"><ellipse cx="30" cy="50" rx="22" ry="18" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><circle cx="30" cy="50" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" /></g>
-          <g transform="translate(360, 560) rotate(-25)"><rect x="0" y="0" width="16" height="28" rx="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="8" y1="28" x2="8" y2="42" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(640, 480)"><ellipse cx="25" cy="0" rx="22" ry="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="3" y1="0" x2="3" y2="32" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="47" y1="0" x2="47" y2="32" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><ellipse cx="25" cy="32" rx="22" ry="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(900, 560) rotate(30)"><circle cx="0" cy="0" r="35" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><circle cx="0" cy="0" r="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1220, 480) rotate(-15)"><path d="M 8 15 Q 4 8 8 0 Q 12 -4 16 0 Q 20 8 16 20 Q 12 28 8 24 L 6 40 Q 4 48 8 52 Q 12 54 16 52" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1500, 540) rotate(20)"><circle cx="0" cy="15" r="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="4" y1="15" x2="4" y2="-5" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1780, 500) rotate(-38)"><path d="M 0 8 L 25 8 L 25 12 L 0 12 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><path d="M 25 6 L 42 0 L 42 20 L 25 14 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(80, 720)"><circle cx="0" cy="0" r="20" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /><circle cx="-12" cy="0" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" /><circle cx="12" cy="0" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" /></g>
-          <g transform="translate(320, 780) rotate(28)"><path d="M 20 0 Q 50 -10 80 0" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /><rect x="15" y="0" width="12" height="20" rx="3" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(580, 720) rotate(-10)"><path d="M 25 0 L 25 40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><ellipse cx="25" cy="50" rx="12" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(860, 760) rotate(18)"><ellipse cx="30" cy="50" rx="25" ry="20" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><circle cx="30" cy="50" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1140, 740) rotate(-35)"><rect x="0" y="0" width="18" height="32" rx="9" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="9" y1="32" x2="9" y2="50" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1420, 760)"><ellipse cx="40" cy="0" rx="30" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="10" y1="0" x2="10" y2="40" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="70" y1="0" x2="70" y2="40" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><ellipse cx="40" cy="40" rx="30" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1700, 720) rotate(25)"><circle cx="0" cy="20" r="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="6" y1="20" x2="6" y2="-10" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(200, 920) rotate(-22)"><path d="M 15 0 Q 8 15 12 30 L 20 45" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /><circle cx="20" cy="50" r="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(460, 980) rotate(12)"><rect x="0" y="0" width="12" height="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><rect x="12" y="0" width="12" height="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(780, 1000)"><circle cx="0" cy="0" r="30" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><circle cx="0" cy="0" r="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1020, 960) rotate(-18)"><circle cx="0" cy="12" r="3.5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="3.5" y1="12" x2="3.5" y2="-5" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1320, 1000) rotate(35)"><path d="M 0 0 L 35 0 L 38 8 L 35 16 L 0 16 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1620, 960) rotate(-28)"><circle cx="0" cy="0" r="25" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /><circle cx="-15" cy="0" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1840, 940) rotate(15)"><path d="M 15 0 Q 40 -8 65 0" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(40, 480) rotate(40)"><ellipse cx="30" cy="50" rx="22" ry="18" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(260, 60)"><circle cx="0" cy="20" r="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="5" y1="20" x2="5" y2="-10" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(580, 160) rotate(-8)"><rect x="0" y="0" width="20" height="35" rx="10" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(920, 180)"><ellipse cx="25" cy="0" rx="22" ry="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><line x1="3" y1="0" x2="3" y2="32" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1180, 200) rotate(25)"><path d="M 10 20 Q 5 10 10 0 Q 15 -5 20 0 Q 25 10 20 25 Q 15 35 10 30 L 8 50 Q 5 60 10 65 Q 15 68 20 65" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1820, 380) rotate(-12)"><circle cx="0" cy="0" r="35" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1850, 1020)"><path d="M 25 0 L 25 40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /><ellipse cx="25" cy="50" rx="12" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(40, 1020) rotate(22)"><path d="M 0 10 L 30 10 L 30 15 L 0 15 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(340, 400) rotate(-18)"><rect x="0" y="0" width="15" height="50" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(620, 380)"><circle cx="0" cy="30" r="8" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1000, 380) rotate(32)"><circle cx="0" cy="15" r="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1280, 420) rotate(-38)"><path d="M 0 8 L 25 8 L 25 12 L 0 12 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1620, 380)"><circle cx="0" cy="0" r="20" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(80, 620) rotate(15)"><path d="M 20 0 Q 10 20 15 40 L 25 60" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(420, 640)"><path d="M 20 0 Q 50 -10 80 0" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(760, 620) rotate(-25)"><ellipse cx="30" cy="50" rx="25" ry="20" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1040, 660)"><rect x="0" y="0" width="16" height="28" rx="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1320, 640) rotate(18)"><ellipse cx="40" cy="0" rx="30" ry="8" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1580, 660) rotate(-32)"><path d="M 8 15 Q 4 8 8 0 Q 12 -4 16 0 Q 20 8 16 20 Q 12 28 8 24 L 6 40 Q 4 48 8 52 Q 12 54 16 52" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(140, 860)"><circle cx="0" cy="20" r="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(420, 860) rotate(28)"><rect x="0" y="0" width="12" height="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(640, 900)"><circle cx="0" cy="0" r="30" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1000, 880) rotate(-15)"><circle cx="0" cy="12" r="3.5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1560, 900) rotate(38)"><path d="M 0 0 L 35 0 L 38 8 L 35 16 L 0 16 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1780, 860)"><circle cx="0" cy="0" r="25" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1880, 620) rotate(-20)"><path d="M 25 0 L 25 40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1900, 460) rotate(15)"><path d="M 15 0 Q 8 15 12 30 L 20 45" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1900, 800)"><path d="M 0 10 L 30 10 L 30 15 L 0 15 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(20, 140) rotate(-12)"><circle cx="0" cy="30" r="8" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(20, 900)"><rect x="0" y="0" width="15" height="50" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1900, 60)"><path d="M 15 0 Q 40 -8 65 0" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(480, 40) rotate(20)"><ellipse cx="30" cy="50" rx="22" ry="18" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(20, 560)"><rect x="0" y="0" width="18" height="32" rx="9" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1900, 1040) rotate(-30)"><circle cx="0" cy="20" r="5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(280, 1040)"><ellipse cx="25" cy="0" rx="22" ry="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1100, 1040) rotate(-22)"><path d="M 0 0 L 35 0 L 38 8 L 35 16 L 0 16 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(600, 1040) rotate(10)"><circle cx="0" cy="0" r="25" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1520, 1040)"><rect x="0" y="0" width="12" height="40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1750, 1040) rotate(-35)"><circle cx="0" cy="15" r="4" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(300, 240) rotate(18)"><circle cx="0" cy="0" r="30" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(700, 340) rotate(-28)"><ellipse cx="30" cy="50" rx="25" ry="20" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(980, 650)"><path d="M 25 0 L 25 40" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(240, 640) rotate(22)"><rect x="0" y="0" width="20" height="35" rx="10" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1260, 870)"><path d="M 15 0 Q 8 15 12 30 L 20 45" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1830, 240) rotate(-15)"><circle cx="0" cy="12" r="3.5" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(40, 340)"><circle cx="0" cy="0" r="20" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(1560, 180) rotate(30)"><circle cx="0" cy="30" r="8" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-muted-foreground" /></g>
-          <g transform="translate(160, 740)"><ellipse cx="25" cy="0" rx="22" ry="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1850, 740) rotate(-40)"><path d="M 0 8 L 25 8 L 25 12 L 0 12 Z" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(500, 820)"><rect x="0" y="0" width="15" height="50" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          <g transform="translate(1400, 200) rotate(12)"><circle cx="0" cy="20" r="6" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted-foreground" /></g>
-          </svg>
-        </div>
+        <SvgBackground instrumentPlacements={instrumentPlacements} />
 
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="inline-block mb-3 sm:mb-4 md:mb-6 px-3 md:px-4 py-1.5 md:py-2 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent-purple/20 border border-primary/30 rounded-full">
