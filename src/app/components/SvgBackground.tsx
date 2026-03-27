@@ -12,7 +12,7 @@ type SvgBackgroundProps = {
 
 export function SvgBackground({ instrumentPlacements }: SvgBackgroundProps) {
   return (
-    <div className="xl:mt-[21px] flex justify-center items-center absolute inset-0 pointer-events-none opacity-[0.2] dark:opacity-[0.28] overflow-hidden">
+    <div className="xl:mt-[21px] px-auto flex justify-center items-center absolute inset-0 pointer-events-none opacity-[0.2] dark:opacity-[0.28] overflow-hidden">
               <svg className="lg:w-[90%] md:w-[80%] md:h-[100%] w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
                 <defs>
                   <g id="icon-note" stroke="currentColor" fill="none" className="text-muted-foreground">

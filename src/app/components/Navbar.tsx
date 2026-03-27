@@ -8,7 +8,7 @@ export function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
 
   return (
-    <nav className=" text-foreground sticky top-4 z-50 bg-card/80 backdrop-blur-lg border-b border-border rounded-lg mx-4">
+    <nav className=" text-foreground sticky top-4 z-50 bg-card/80 backdrop-blur-lg border-b border-border rounded-lg w-[90%] mx-auto">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center md:h-16 h-12">
           {/* Navigation Links */}
