@@ -31,38 +31,6 @@ export default function Leaderboard() {
         { id: '10', username: 'RapGod', totalWins: 45, totalMatches: 98, averageScore: 6.2319, rank: 10 },
       ];
 
-      // Try to add real users from localStorage
-      const usersData = localStorage.getItem('antakshari_users');
-      if (usersData) {
-        const users = JSON.parse(usersData);
-        
-        users.forEach((user: any) => {
-          const historyKey = `antakshari_history_${user.id}`;
-          const historyData = localStorage.getItem(historyKey);
-          
-          if (historyData) {
-            const history = JSON.parse(historyData);
-            const totalMatches = history.length;
-            const totalWins = history.filter((m: any) => m.position === 1).length;
-            // Calculate average score with 4 decimal places (0-10 scale)
-            const averageScore = totalMatches > 0 
-              ? parseFloat((history.reduce((sum: number, m: any) => sum + m.score, 0) / totalMatches).toFixed(4))
-              : 0;
-
-            if (totalMatches > 0) {
-              mockPlayers.push({
-                id: user.id,
-                username: user.username,
-                totalWins,
-                totalMatches,
-                averageScore,
-                rank: 0, // Will be assigned after sorting
-              });
-            }
-          }
-        });
-      }
-
       // Sort by total wins, then by average score
       mockPlayers.sort((a, b) => {
         if (b.totalWins !== a.totalWins) {
@@ -109,12 +77,12 @@ export default function Leaderboard() {
         {/* Header */}
         <div className="text-center mb-6 md:mb-8 lg:mb-12">
           <div className="inline-flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
-            <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500 rounded-xl flex items-center justify-center">
-              <Trophy className="w-6 h-6 md:w-8 md:h-8 text-white" />
+            <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-yellow-500 via-orange-500 to-pink-500 lg:rounded-xl rounded-lg flex items-center justify-center">
+              <Trophy className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 md:mb-3">Global Leaderboard</h1>
-          <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">Global Leaderboard</h1>
+          <p className="text-muted-foreground text-xs md:text-sm lg:text-base">
             Top performers ranked by total wins
           </p>
           
