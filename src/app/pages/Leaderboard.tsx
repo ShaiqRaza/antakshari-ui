@@ -73,7 +73,7 @@ export default function Leaderboard() {
       {/* Navbar */}
       <Navbar />
       
-      <div className="container mx-auto px-4 py-6 md:py-8 lg:py-12 max-w-6xl">
+      <div className="container mx-auto px-4 py-8 md:py-10 lg:py-12 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-6 md:mb-8 lg:mb-12">
           <div className="inline-flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
@@ -120,20 +120,20 @@ export default function Leaderboard() {
         </div>
 
         {/* Leaderboard Table */}
-        <div className="space-y-2 md:space-y-3">
+        <div className="space-y-2">
           {leaderboardData.map((player) => (
             <div
               key={player.id}
-              className={`border rounded-xl p-3 md:p-4 lg:p-6 transition-all hover:shadow-lg ${getRankBg(player.rank)}`}
+              className={`border rounded-xl p-3 md:p-2 transition-all hover:shadow-lg ${getRankBg(player.rank)}`}
             >
               <div className="grid grid-cols-12 gap-2 md:gap-4 items-center">
                 {/* Rank */}
-                <div className="col-span-2 md:col-span-1 flex justify-center">
+                <div className="col-span-1 md:col-span-1 flex justify-center">
                   {getRankIcon(player.rank)}
                 </div>
 
                 {/* Username */}
-                <div className="col-span-10 md:col-span-3">
+                <div className="col-span-11 md:col-span-3">
                   <h3 className="font-bold text-foreground text-sm md:text-base lg:text-lg">{player.username}</h3>
                 </div>
 
@@ -141,22 +141,22 @@ export default function Leaderboard() {
                 <div className="col-span-12 md:col-span-8 grid grid-cols-4 gap-2 md:gap-4">
                   <div className="text-center">
                     <p className="text-[10px] md:text-xs text-muted-foreground mb-1">Wins</p>
-                    <p className="text-sm md:text-base lg:text-lg lg:text-xl font-bold text-yellow-500">{player.totalWins}</p>
+                    <p className="text-sm md:text-base lg:text-lg font-bold text-yellow-500">{player.totalWins}</p>
                   </div>
 
                   <div className="text-center">
                     <p className="text-[10px] md:text-xs text-muted-foreground mb-1">Matches</p>
-                    <p className="text-sm md:text-base lg:text-lg lg:text-xl font-bold text-cyan-500">{player.totalMatches}</p>
+                    <p className="text-sm md:text-base lg:text-lg font-bold text-cyan-500">{player.totalMatches}</p>
                   </div>
 
                   <div className="text-center">
                     <p className="text-[10px] md:text-xs text-muted-foreground mb-1">Avg Score</p>
-                    <p className="text-sm md:text-base lg:text-lg lg:text-xl font-bold text-pink-500">{player.averageScore}</p>
+                    <p className="text-sm md:text-base lg:text-lg font-bold text-pink-500">{player.averageScore}</p>
                   </div>
 
                   <div className="text-center">
                     <p className="text-[10px] md:text-xs text-muted-foreground mb-1">Win Rate</p>
-                    <p className="text-sm md:text-base lg:text-lg lg:text-xl font-bold text-purple-500">
+                    <p className="text-sm md:text-base lg:text-lg font-bold text-purple-500">
                       {getWinRate(player.totalWins, player.totalMatches)}%
                     </p>
                   </div>
