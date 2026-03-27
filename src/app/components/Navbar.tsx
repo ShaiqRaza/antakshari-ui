@@ -12,7 +12,12 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center md:h-16 h-12">
           {/* Navigation Links */}
-          <div className="flex items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-2 md:gap-4"><Link
+              to="/"
+              className="flex items-center gap-2 px-2 md:px-3 py-2 rounded-lg hover:bg-muted transition-colors text-foreground"
+            >
+              <span className="text-xs md:text-sm font-[Fredoka_One]">Home</span>
+            </Link>
             {/* Leaderboard Link - Always visible */}
             <Link
               to="/leaderboard"
@@ -29,8 +34,8 @@ export function Navbar() {
                   to={`/profile/${user?.username}`}
                   className="flex items-center gap-2 px-2 md:px-3 py-2 rounded-lg hover:bg-muted transition-colors text-foreground"
                 >
-                  <User className="w-4 h-4" />
-                  <span className="text-xs md:text-sm hidden md:inline font-[Fredoka_One]">{user?.username}</span>
+                  <User className="md:inline hidden w-4 h-4" />
+                  <span className="text-xs md:text-sm font-[Fredoka_One]">{user?.username}</span>
                 </Link>
 
                 {/* Logout Button */}
@@ -38,8 +43,8 @@ export function Navbar() {
                   onClick={logout}
                   className="flex items-center gap-2 px-2 md:px-3 py-2 rounded-lg hover:bg-muted transition-colors hover:text-foreground"
                 >
-                  <LogOut className="w-4 h-4" />
-                  <span className="text-xs md:text-sm hidden md:inline">Logout</span>
+                  <LogOut className="md:inline hidden w-4 h-4" />
+                  <span className="text-xs md:text-sm">Logout</span>
                 </button>
               </>
             ) : (
@@ -49,7 +54,7 @@ export function Navbar() {
                   to="/login"
                   className="flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg hover:bg-muted transition-colors text-foreground"
                 >
-                  <LogIn className="w-4 h-4" />
+                  <LogIn className="md:inline hidden w-4 h-4" />
                   <span className="text-xs md:text-sm font-[Fredoka_One]">Login</span>
                 </Link>
 
