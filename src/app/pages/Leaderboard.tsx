@@ -87,46 +87,14 @@ export default function Leaderboard() {
           </p>
           
         </div>
-
-        {/* Stats Summary */}
-        <div className="grid grid-cols-3 gap-1 md:gap-4 mb-6 md:mb-8">
-          <div className="bg-card border border-border rounded-xl p-2 md:p-6">
-            <div className="flex items-center gap-2 md:gap-3 mb-2">
-              <Target className="w-5 h-5 md:w-6 md:h-6 text-cyan-500" />
-              <h3 className="text-[8px] md:text-base font-semibold text-foreground">Total Players</h3>
-            </div>
-            <p className="text-base  md:text-3xl font-bold text-foreground">{leaderboardData.length}</p>
-          </div>
-
-          <div className="bg-card border border-border rounded-xl p-2 md:p-6">
-            <div className="flex items-center gap-2 md:gap-3 mb-2">
-              <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-pink-500" />
-              <h3 className="text-[8px] md:text-base font-semibold text-foreground">Total Matches</h3>
-            </div>
-            <p className="text-base  md:text-3xl font-bold text-foreground">
-              {leaderboardData.reduce((sum, p) => sum + p.totalMatches, 0)}
-            </p>
-          </div>
-
-          <div className="bg-card border border-border rounded-xl p-2 md:p-6">
-            <div className="flex items-center gap-2 md:gap-3 mb-2">
-              <Trophy className="w-5 h-5 md:w-6 md:h-6 text-yellow-500" />
-              <h3 className="text-[8px] md:text-base font-semibold text-foreground">Top Player</h3>
-            </div>
-            <p className="text-sm md:text-2xl font-bold text-foreground">
-              {leaderboardData[0]?.username || 'N/A'}
-            </p>
-          </div>
-        </div>
-
         {/* Leaderboard Table */}
         <div className="space-y-2">
           {leaderboardData.map((player) => (
             <div
               key={player.id}
-              className={`border rounded-xl p-3 md:p-2 transition-all hover:shadow-lg ${getRankBg(player.rank)}`}
+              className={`border rounded-xl px-3 md:px-2 pt-2 pb-1 md:pb-2 transition-all hover:shadow-lg ${getRankBg(player.rank)}`}
             >
-              <div className="grid grid-cols-12 gap-2 md:gap-4 items-center">
+              <div className="grid grid-cols-12 gap-1 md:gap-4 items-center">
                 {/* Rank */}
                 <div className="col-span-1 md:col-span-1 flex justify-center">
                   {getRankIcon(player.rank)}
@@ -134,28 +102,28 @@ export default function Leaderboard() {
 
                 {/* Username */}
                 <div className="col-span-11 md:col-span-3">
-                  <h3 className="font-bold text-foreground text-sm md:text-base lg:text-lg">{player.username}</h3>
+                  <h3 className="text-foreground text-sm md:text-base lg:text-lg">{player.username}</h3>
                 </div>
 
                 {/* Stats */}
-                <div className="col-span-12 md:col-span-8 grid grid-cols-4 gap-2 md:gap-4">
+                <div className="col-span-12 md:col-span-8 grid grid-cols-4 md:gap-4">
                   <div className="text-center">
-                    <p className="text-[10px] md:text-xs text-muted-foreground mb-1">Wins</p>
+                    <p className="text-[10px] md:text-xs text-muted-foreground">Wins</p>
                     <p className="text-sm md:text-base lg:text-lg font-bold text-yellow-500">{player.totalWins}</p>
                   </div>
 
                   <div className="text-center">
-                    <p className="text-[10px] md:text-xs text-muted-foreground mb-1">Matches</p>
+                    <p className="text-[10px] md:text-xs text-muted-foreground">Matches</p>
                     <p className="text-sm md:text-base lg:text-lg font-bold text-cyan-500">{player.totalMatches}</p>
                   </div>
 
                   <div className="text-center">
-                    <p className="text-[10px] md:text-xs text-muted-foreground mb-1">Avg Score</p>
+                    <p className="text-[10px] md:text-xs text-muted-foreground">Avg Score</p>
                     <p className="text-sm md:text-base lg:text-lg font-bold text-pink-500">{player.averageScore}</p>
                   </div>
 
                   <div className="text-center">
-                    <p className="text-[10px] md:text-xs text-muted-foreground mb-1">Win Rate</p>
+                    <p className="text-[10px] md:text-xs text-muted-foreground">Win Rate</p>
                     <p className="text-sm md:text-base lg:text-lg font-bold text-purple-500">
                       {getWinRate(player.totalWins, player.totalMatches)}%
                     </p>
