@@ -112,7 +112,7 @@ export function Landing() {
       `}</style>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20 text-center mx-[64px] mt-[32px] mb-[72px] relative">
+      <section className="container mx-auto px-4 py-12 md:py-20 text-center mt-[32px] mb-[72px] relative">
         {/* Musical Background Pattern - Only in Hero Section */}
         <SvgBackground instrumentPlacements={instrumentPlacements} />
 
@@ -148,7 +148,7 @@ export function Landing() {
                 }}
                 className={`pl-2 text-xs md:text-sm py-2 border-2 ${
                   usernameError ? "border-red-500" : "border-primary/30"
-                } focus:border-primary transition-colors bg-card/50 backdrop-blur-sm`}
+                } hover:border-primary transition-colors bg-card/50 backdrop-blur-sm`}
                 maxLength={20}
               />
             </div>
@@ -164,7 +164,7 @@ export function Landing() {
             <Button 
               size="lg" 
               onClick={handlePlayClick}
-              className="w-full sm:w-auto bg-gradient-to-r from-primary to-accent-orange hover:opacity-90 text-white text-sm sm:text-base md:text-lg shadow-lg shadow-primary/30 px-8 sm:px-12 md:px-[48px] py-5 sm:py-6 md:py-[24px]"
+              className="cursor-pointer w-full sm:w-auto bg-gradient-to-r from-primary to-accent-orange text-white text-sm sm:text-base md:text-lg hover:text-base hover:sm:text-lg hover:md:text-xl shadow-lg shadow-primary/30 px-8 sm:px-12 md:px-[48px] py-5 sm:py-6 md:py-[24px]"
             >
               Play!
             </Button>
@@ -172,7 +172,7 @@ export function Landing() {
               size="lg" 
               variant="outline"
               onClick={handlePrivateRoomClick}
-              className="w-full sm:w-auto border-2 border-secondary text-secondary hover:bg-secondary/10 text-sm sm:text-base md:text-lg px-6 sm:px-7 md:px-8 py-5 sm:py-6 md:py-6"
+              className="cursor-pointer w-full sm:w-auto border-2 border-secondary text-secondary hover:text-secondary text-sm sm:text-base md:text-lg hover:text-base hover:sm:text-lg hover:md:text-xl px-6 sm:px-7 md:px-8 py-5 sm:py-6 md:py-6"
             >
               <Lock className="w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-2" />
               Create Private Room
