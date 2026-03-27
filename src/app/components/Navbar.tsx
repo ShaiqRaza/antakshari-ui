@@ -61,7 +61,7 @@ export function Navbar() {
                 {/* Signup Button */}
                 <Link
                   to="/signup"
-                  className="hidden md:flex items-center gap-2 px-3 md:px-4 py-2 text-white hover:opacity-90 transition-opacity"
+                  className="hidden md:flex items-center gap-2 px-3 md:px-4 py-2 text-white hover:opacity-90 hover:bg-muted transition-colors rounded-lg"
                 >
                   <span className="text-xs md:text-sm font-[Fredoka_One]">Sign Up</span>
                 </Link>
