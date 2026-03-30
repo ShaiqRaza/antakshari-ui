@@ -132,14 +132,14 @@ export function GameRoom() {
         {/* Responsive Layout: Mobile - Middle top, Players/Chat bottom | Desktop - Players left, Middle center, Chat right */}
         <div className="grid grid-cols-12 gap-2 md:gap-4 lg:gap-6">
           {/* Player List with Scores - Bottom Left on Mobile, Far Left on Desktop */}
-          <div className="col-span-6 md:col-span-3 order-2 md:order-1">
-            <Card className="lg:p-4 md:p-3 p-1 bg-card border-border md:h-[450px] h-[400px]">
+          <div className="col-span-6 md:col-span-4 order-2 md:order-1">
+            <Card className="lg:py-4 md:py-3 lg:px-8 md:px-4 p-1 bg-card border-border md:h-[450px] h-[400px]">
               <PlayerList players={players} />
             </Card>
           </div>
 
           {/* Middle Sections - Top on Mobile, Center on Desktop */}
-          <div className="col-span-12 md:col-span-5 order-1 md:order-2 space-y-2 md:space-y-4 lg:space-y-6">
+          <div className="col-span-12 md:col-span-4 order-1 md:order-2 space-y-2 md:space-y-4 lg:space-y-6">
             {/* Current Letter Display */}
             <Card className="p-6 bg-card border-2 border-transparent bg-gradient-to-br from-primary/10 via-secondary/10 to-accent-purple/10 text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent-purple/5 animate-pulse" />
@@ -154,7 +154,7 @@ export function GameRoom() {
                     </span>
                   </div>
                 </div>
-                <div className="inline-block px-4 py-2 bg-accent/20 rounded-full border border-accent/30 bg-[#2e2b0542]">
+                <div className="inline-block px-4 py-2 rounded-full border border-accent/30 bg-[#2e2b0542]">
                   <span className="text-sm text-muted-foreground">
                     <span className="font-semibold text-foreground">
                       {username || "Player"}

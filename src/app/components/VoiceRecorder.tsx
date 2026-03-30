@@ -25,10 +25,10 @@ export function VoiceRecorder({ onRecordingComplete, disabled = false }: VoiceRe
       <Button
         onClick={handleToggleRecording}
         disabled={disabled}
-        className={`md:w-22 md:h-22 w-16 h-16 rounded-full transition-all shadow-lg ${
+        className={`cursor-pointer md:w-22 md:h-22 w-16 h-16 rounded-full transition-all shadow-lg ${
           isRecording
-            ? "bg-gradient-to-br from-primary to-accent-orange hover:opacity-90 animate-pulse shadow-primary/50"
-            : "bg-gradient-to-br from-secondary to-accent-purple hover:opacity-90 shadow-secondary/30"
+            ? "bg-gradient-to-br from-primary to-accent-orange hover:opacity-80 animate-pulse shadow-primary/50"
+            : "bg-gradient-to-br from-secondary to-accent-purple hover:opacity-80 shadow-secondary/30"
         } disabled:opacity-50 disabled:cursor-not-allowed`}
         size="lg"
       >
