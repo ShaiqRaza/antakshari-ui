@@ -1,26 +1,12 @@
 import { Clock } from "lucide-react";
-import { useEffect, useState } from "react";
 
 interface GameTimerProps {
   duration: number; // in seconds
+  timeLeft: number; // current time remaining
   onTimeout?: () => void;
 }
 
-export function GameTimer({ duration, onTimeout }: GameTimerProps) {
-  const [timeLeft, setTimeLeft] = useState(duration);
-
-  useEffect(() => {
-    if (timeLeft <= 0) {
-      onTimeout?.();
-      return;
-    }
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeLeft, onTimeout]);
+export function GameTimer({ duration, timeLeft, onTimeout }: GameTimerProps) {
 
   const percentage = (timeLeft / duration) * 100;
   const isUrgent = timeLeft <= 10;
