@@ -273,16 +273,16 @@ export function GameRoom() {
 
         {/* Scoring Section - Full Width Below Grid */}
         {!isMyTurn && (
-          <div className="mt-8 md:mt-0 md:absolute md:bottom-6 md:left-1/2 md:-translate-x-1/2 md:w-4/5 lg:w-3/5 md:z-20">
+            <div className="mt-6 md:w-[80%] w-full mx-auto">
             <div className="bg-gradient-to-r from-red-500/10 via-amber-500/10 to-green-500/10 backdrop-blur-md rounded-2xl md:rounded-3xl p-4 md:p-5 border border-border/60 shadow-2xl md:shadow-xl">
               <div className="mb-3 md:mb-2">
-                <h3 className="text-sm md:text-base font-bold text-foreground mb-0.5">Rate {currentPlayer?.username}</h3>
+                <h3 className="text-sm md:text-base text-foreground mb-0.5">Rate {currentPlayer?.username}</h3>
               </div>
               
               <div className="flex items-center justify-between gap-2 md:gap-1.5">
-                <span className="text-[10px] md:text-xs font-semibold text-muted-foreground whitespace-nowrap">😞</span>
+                <span className="text-sm md:text-base font-semibold text-muted-foreground whitespace-nowrap">😞</span>
                 
-                <div className="grid grid-cols-11 gap-1 flex-1">
+                <div className="grid grid-cols-11 md:gap-2 gap-1 flex-1">
                   {Array.from({ length: 11 }, (_, score) => {
                     const hue = 8 + score * 12;
                     const isSelected = ratings[currentPlayer?.id || ""] === score;
@@ -311,7 +311,7 @@ export function GameRoom() {
                   })}
                 </div>
                 
-                <span className="text-[10px] md:text-xs font-semibold text-muted-foreground whitespace-nowrap">🤩</span>
+                <span className="text-sm md:text-base font-semibold text-muted-foreground whitespace-nowrap">🤩</span>
               </div>
             </div>
           </div>
@@ -319,7 +319,7 @@ export function GameRoom() {
       </div>
 
       {/* Leave Room Button - At Bottom of Page */}
-      <div className="container mx-auto px-4 mt-2 pb-8 flex justify-center gap-4">
+      <div className="container mx-auto px-4 mt-2 pb-2 flex justify-center gap-4">
         {/* Copy Link Button - Only show for private rooms */}
         {isPrivateRoom && (
           <Button
@@ -354,12 +354,6 @@ export function GameRoom() {
           <LogOut className="w-5 h-5 mr-2" />
           Leave Room
         </Button>
-      </div>
-
-      {/* Decorative Background Elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/4 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
       </div>
     </div>
   );
