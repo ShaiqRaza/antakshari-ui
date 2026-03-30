@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { LogIn, Mail, Lock } from 'lucide-react';
+import { Navbar } from '../components/Navbar';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -28,7 +29,10 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-background flex flex-col">
+      <Navbar />
+
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-4">
@@ -115,6 +119,7 @@ export default function Login() {
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { UserPlus, Mail, Lock, User } from 'lucide-react';
+import { Navbar } from '../components/Navbar';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
@@ -46,7 +47,9 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-background flex flex-col relative overflow-x-hidden">
+      <Navbar />
+
       {/* Vibrant background gradient orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
@@ -55,6 +58,7 @@ export default function Signup() {
         <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-accent/10 rounded-full blur-3xl"></div>
       </div>
 
+      <div className="flex-1 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-3 mb-4">
@@ -62,7 +66,7 @@ export default function Signup() {
               <UserPlus className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2 bg-gradient-to-r from-primary via-accent-purple to-secondary bg-clip-text text-transparent">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-primary via-accent-purple to-secondary bg-clip-text text-transparent">
             Join Antakshari Live
           </h1>
           <p className="text-muted-foreground">
@@ -73,7 +77,7 @@ export default function Signup() {
         <div className="bg-card border-2 border-border rounded-2xl p-6 md:p-8 shadow-2xl shadow-primary/5 backdrop-blur-sm">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+              <label htmlFor="username" className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
                 <span className="w-1 h-4 bg-gradient-to-b from-primary to-accent-purple rounded-full"></span>
                 Username
               </label>
@@ -92,7 +96,7 @@ export default function Signup() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+              <label htmlFor="email" className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
                 <span className="w-1 h-4 bg-gradient-to-b from-secondary to-accent rounded-full"></span>
                 Email Address
               </label>
@@ -111,7 +115,7 @@ export default function Signup() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+              <label htmlFor="password" className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
                 <span className="w-1 h-4 bg-gradient-to-b from-accent-purple to-accent-green rounded-full"></span>
                 Password
               </label>
@@ -130,7 +134,7 @@ export default function Signup() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+              <label htmlFor="confirmPassword" className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
                 <span className="w-1 h-4 bg-gradient-to-b from-accent to-accent-orange rounded-full"></span>
                 Confirm Password
               </label>
@@ -192,6 +196,7 @@ export default function Signup() {
           <div className="w-2 h-2 rounded-full bg-accent-purple animate-pulse delay-300"></div>
           <div className="w-2 h-2 rounded-full bg-accent-green animate-pulse delay-500"></div>
         </div>
+      </div>
       </div>
     </div>
   );

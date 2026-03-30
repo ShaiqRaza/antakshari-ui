@@ -98,7 +98,7 @@ export function Landing() {
   );
 
   return (
-    <div className="min-h-screen bg-background transition-colors duration-300 relative overflow-hidden">
+    <div className="min-h-screen bg-background transition-colors duration-300 relative">
 
       {/* Navbar */}
       <Navbar />
