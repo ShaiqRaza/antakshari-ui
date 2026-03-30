@@ -37,7 +37,7 @@ export function PlayerList({ players }: PlayerListProps) {
               key={player.id}
               className={`flex items-center gap-1 py-1 px-2 rounded-lg transition-all ${
                 player.isCurrentTurn
-                  ? "bg-gradient-to-r from-primary/20 to-accent-orange/20 border border-primary/50 scale-y-105 scale-x-[0.98] shadow-lg shadow-primary/20"
+                  ? "bg-gradient-to-r from-primary/20 to-accent-orange/20 border border-primary/50 scale-x-[1.01] shadow-lg shadow-primary/20"
                   : "bg-muted/50 hover:bg-muted/70"
               }`}
             >
