@@ -57,9 +57,10 @@ export function GameRoom() {
   const [chatMessage, setChatMessage] = useState("");
   const [currentLetter, setCurrentLetter] = useState("P");
   const [copied, setCopied] = useState(false);
-  const [ratings, setRatings] = useState<Record<string, number | null>>({});
+  const [ratings, setRatings] = useState<Record<string, Record<string, number>>>({});
   const [turnIndex, setTurnIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TURN_DURATION_SECONDS);
+  const [scoreStats, setScoreStats] = useState<Record<string, { average: number; ratedTurns: number }>>({});
   const { username } = useUsername();
   const navigate = useNavigate();
   const params = useParams<{ roomId?: string; roomType?: string; roomCode?: string }>();
@@ -83,14 +84,26 @@ export function GameRoom() {
     [username],
   );
 
+  useEffect(() => {
+    setScoreStats((prev) => {
+      const next: Record<string, { average: number; ratedTurns: number }> = {};
+
+      playerOrder.forEach((player) => {
+        next[player.id] = prev[player.id] ?? { average: 0, ratedTurns: 0 };
+      });
+
+      return next;
+    });
+  }, [playerOrder]);
+
   const players = useMemo(
     () =>
       playerOrder.map((player, index) => ({
         ...player,
-        score: otherMockPlayers.find((p) => p.id === player.id)?.score ?? 8.4562,
+        score: Number((scoreStats[player.id]?.average ?? 0).toFixed(2)),
         isCurrentTurn: index === turnIndex,
       })),
-    [playerOrder, turnIndex],
+    [playerOrder, scoreStats, turnIndex],
   );
 
   // Get current player and check if it's the local player
@@ -98,13 +111,42 @@ export function GameRoom() {
   const isMyTurn = currentPlayer?.id === LOCAL_PLAYER_ID;
 
   const handleScoreSelect = (playerId: string, score: number) => {
-    setRatings((prev) => ({ ...prev, [playerId]: score }));
+    setRatings((prev) => ({
+      ...prev,
+      [playerId]: {
+        ...(prev[playerId] ?? {}),
+        [LOCAL_PLAYER_ID]: score,
+      },
+    }));
   };
 
   // Timer and turn progression logic
   useEffect(() => {
     const timer = window.setTimeout(() => {
       if (timeLeft <= 1) {
+        const currentTurnPlayerId = playerOrder[turnIndex]?.id;
+        const turnRatings = currentTurnPlayerId ? Object.values(ratings[currentTurnPlayerId] ?? {}) : [];
+
+        // Missing ratings are ignored by only averaging submitted values.
+        if (currentTurnPlayerId && turnRatings.length > 0) {
+          const turnAverage = turnRatings.reduce((sum, value) => sum + value, 0) / turnRatings.length;
+
+          setScoreStats((prev) => {
+            const currentStats = prev[currentTurnPlayerId] ?? { average: 0, ratedTurns: 0 };
+            const nextRatedTurns = currentStats.ratedTurns + 1;
+            const nextAverage =
+              (currentStats.average * currentStats.ratedTurns + turnAverage) / nextRatedTurns;
+
+            return {
+              ...prev,
+              [currentTurnPlayerId]: {
+                average: nextAverage,
+                ratedTurns: nextRatedTurns,
+              },
+            };
+          });
+        }
+
         // Time's up, move to next player
         const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         setCurrentLetter(alphabet[Math.floor(Math.random() * alphabet.length)]);
@@ -118,7 +160,7 @@ export function GameRoom() {
     }, 1000);
 
     return () => window.clearTimeout(timer);
-  }, [timeLeft, playerOrder.length]);
+  }, [timeLeft, playerOrder, ratings, turnIndex]);
 
   const handleLeaveRoom = () => {
     navigate("/");
@@ -285,7 +327,8 @@ export function GameRoom() {
                 <div className="grid grid-cols-11 md:gap-2 gap-1 flex-1">
                   {Array.from({ length: 11 }, (_, score) => {
                     const hue = 8 + score * 12;
-                    const isSelected = ratings[currentPlayer?.id || ""] === score;
+                    const isSelected =
+                      ratings[currentPlayer?.id || ""]?.[LOCAL_PLAYER_ID] === score;
                     const lightness = isSelected ? 48 : 90;
                     const saturation = isSelected ? 85 : 65;
                     
