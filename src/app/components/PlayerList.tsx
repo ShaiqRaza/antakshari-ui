@@ -23,13 +23,13 @@ const playerColors = [
 export function PlayerList({ players }: PlayerListProps) {
   return (
     <div className="space-y-3">
-      <h3 className="lg:text-lg md:text-base text-sm font-semibold text-foreground flex items-center gap-2 p-2 border-b border-border">
+      <h3 className="lg:text-lg md:text-base text-sm font-normal text-foreground flex items-center gap-2 p-2 border-b border-border">
         <div className="w-6 h-6 bg-gradient-to-br from-accent to-accent-green rounded-md flex items-center justify-center">
           <Crown className="w-4 h-4 text-white" />
         </div>
         Players
       </h3>
-      <div className="space-y-3 md:text-xs text-[8px]">
+      <div className="space-y-1 md:text-xs text-[8px]">
         {players.map((player, index) => {
           const colorGradient = playerColors[index % playerColors.length];
           return (
@@ -57,7 +57,7 @@ export function PlayerList({ players }: PlayerListProps) {
                 </div>
                 <div className="text-muted-foreground">Score: {player.score}</div>
               </div>
-              <div className={`text-lg font-bold ${
+              <div className={`text-sm md:text-base lg:text-lg font-bold ${
                 index === 0 ? "text-primary" :
                 index === 1 ? "text-secondary" :
                 index === 2 ? "text-accent-purple" :

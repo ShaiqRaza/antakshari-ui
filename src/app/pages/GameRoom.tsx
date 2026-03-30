@@ -174,7 +174,7 @@ export function GameRoom() {
         <div className="grid grid-cols-12 gap-2 md:gap-4 lg:gap-6 relative">
           {/* Player List with Scores - Bottom Left on Mobile, Far Left on Desktop */}
           <div className="col-span-6 md:col-span-4 order-2 md:order-1">
-            <Card className="lg:py-4 md:py-3 lg:px-8 md:px-4 p-1 bg-card border-border md:h-[450px] h-[400px]">
+            <Card className="lg:py-4 md:py-3 lg:px-8 md:px-4 p-1 bg-card border-border md:h-[450px] h-[300px]">
               <PlayerList players={players} />
             </Card>
           </div>
@@ -182,21 +182,21 @@ export function GameRoom() {
           {/* Middle Sections - Top on Mobile, Center on Desktop */}
           <div className="col-span-12 md:col-span-4 order-1 md:order-2 space-y-2 md:space-y-4 lg:space-y-6">
             {/* Current Letter Display */}
-            <Card className="p-6 bg-card border-2 border-transparent bg-gradient-to-br from-primary/10 via-secondary/10 to-accent-purple/10 text-center relative overflow-hidden">
+            <Card className="p-3 md:p-6 bg-card border-2 border-transparent bg-gradient-to-br from-primary/10 via-secondary/10 to-accent-purple/10 text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent-purple/5 animate-pulse" />
               <div className="relative z-10">
                 <div className="mb-3">
-                  <p className="text-sm text-muted-foreground mb-2">
+                  <p className="text-xs md:text-sm text-muted-foreground mb-2">
                     Sing a song starting with
                   </p>
-                  <div className="lg:w-28 lg:h-28 md:w-24 md:h-24 w-20 h-20  mx-auto bg-gradient-to-br from-primary via-secondary to-accent-purple rounded-full flex items-center justify-center shadow-2xl shadow-primary/30">
-                    <span className="lg:text-6xl md:text-5xl text-4xl font-bold text-white">
+                  <div className="lg:w-28 lg:h-28 md:w-24 md:h-24 w-16 h-16  mx-auto bg-gradient-to-br from-primary via-secondary to-accent-purple rounded-full flex items-center justify-center shadow-2xl shadow-primary/30">
+                    <span className="lg:text-6xl md:text-4xl text-2xl font-bold text-white">
                       {currentLetter}
                     </span>
                   </div>
                 </div>
                 <div className="inline-block px-4 py-2 rounded-full border border-accent/30 bg-[#2e2b0542]">
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-xs md:text-sm text-muted-foreground">
                     <span className="font-semibold text-foreground">
                       {currentPlayer?.username || "Player"}
                     </span>
@@ -224,11 +224,11 @@ export function GameRoom() {
 
           {/* Chat Panel - Bottom Right on Mobile, Far Right on Desktop */}
           <div className="col-span-6 md:col-span-4 order-3 md:order-3 md:text-xs text-[8px]">
-            <Card className="lg:p-4 md:p-3 p-1 bg-card border-border md:h-[450px] h-[400px] ">
+            <Card className="lg:p-4 md:p-3 p-1 bg-card border-border md:h-[450px] h-[300px] ">
               <div className="flex flex-col h-full">
                 <div className="flex items-center gap-2 mb-3 p-2 border-b border-border">
                   <MessageCircle className="w-6 h-6 text-primary" />
-                  <h3 className="font-semibold text-foreground lg:text-lg md:text-base text-sm">
+                  <h3 className="font-normal text-foreground lg:text-lg md:text-base text-sm">
                     Chat
                   </h3>
                 </div>
