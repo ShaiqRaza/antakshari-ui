@@ -32,14 +32,17 @@ export default function Login() {
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
 
+      {/* Vibrant background gradient orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 right-1/3 w-80 h-80 bg-accent-purple/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/3 w-72 h-72 bg-accent/10 rounded-full blur-3xl"></div>
+      </div>
+
       <div className="flex-1 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-pink-500 via-purple-500 to-cyan-500 rounded-xl flex items-center justify-center">
-              <LogIn className="w-6 h-6 text-white" />
-            </div>
-          </div>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
             Welcome Back!
           </h1>
